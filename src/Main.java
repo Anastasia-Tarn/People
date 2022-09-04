@@ -3,6 +3,8 @@ import java.util.stream.Collectors;
 
 public class Main {
 
+    private static Collection<Person> perso;
+
     public static void main(String[] args) {
 
         List<String> names = Arrays.asList("Jack", "Connor", "Harry", "George", "Samuel", "John");
@@ -23,16 +25,15 @@ public class Main {
                 .count();
 
         persons.stream()
-                .filter(x -> x.getAge() > 18 && x.getAge() < 27)
+                .filter(x -> x.getAge() >= 18 && x.getAge() < 27)
                 .filter(x -> x.getSex().equals("MAN"))
                 .map(Person::getFamily)
                 .collect(Collectors.toList());
 
         persons.stream()
-                .filter(x -> x.getAge() > 18 && x.getAge() < 65 && x.getSex().equals("MAN"))
-                .filter(x -> x.getAge() > 18 && x.getAge() < 60 && x.getSex().equals("WOMAN"))
+                .filter(x -> x.getAge() >= 18 && x.getAge() < 65 && x.getSex().equals("MAN")||x.getAge()>= 18 && x.getAge() < 60 && x.getSex().equals("WOMAN"))
                 .filter(x -> x.getEducation().equals("HIGHER"))
-                .sorted(Comparator.comparing(Person::getFamily))
+                .map(Person::getFamily)
                 .collect(Collectors.toList());
 
     }
